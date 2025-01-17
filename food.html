@@ -11,7 +11,7 @@
       <b>What food would you like to eat?</b>
     </div>
 
-    <div class="food-selection">
+    <form class="food-selection" onsubmit="submitFood(event)">
       <div class="food-item">
         <img src="food/burgers.jpeg" alt="Burgers, fries and fried chicken" />
         <label
@@ -56,9 +56,34 @@
         <img src="food/sushi.jpeg" alt="sushi" />
         <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
       </div>
-    </div>
-    <button class="button" onclick="location.href='dessert.html'">
-      Continue UWU
-    </button>
+      <button class="button" type="submit">Continue UWU</button>
+    </form>
+
+    <script>
+      function submitFood(event) {
+        event.preventDefault();
+
+        const selectedFoods = Array.from(
+          document.querySelectorAll('input[name="food"]:checked')
+        ).map((input) => input.value);
+
+        fetch('https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ foods: selectedFoods }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert('Your food preferences have been recorded!');
+            window.location.href = 'dessert.html'; // Redirect to the next page
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
+    
   </body>
 </html>
