@@ -33,6 +33,7 @@
         .then((response) => response.json())
         .then((data) => {
           alert('Your response has been recorded!');
+          window.location.href = 'food.html';
         })
         .catch((error) => {
           console.error('Error:', error);
