@@ -9,7 +9,7 @@
   <body>
     <div id="dessertquestion">Which dessert we eatin cuh</div>
 
-    <div class="dessert-selection">
+    <form class="dessert-selection" onsubmit="submitDessert(event)">
       <div class="dessert-item">
         <img src="food/boba.jpeg" alt="boba" />
         <label
@@ -46,9 +46,33 @@
           taiyaki</label
         >
       </div>
-    </div>
-    <button class="button" onclick="location.href='activities.html'">
-      Continue UWU
-    </button>
+      <button class="button" type="submit">Continue UWU</button>
+    </form>
+    
+    <script>
+      function submitDessert(event) {
+        event.preventDefault();
+
+        const selectedDesserts = Array.from(
+          document.querySelectorAll('input[name="dessert"]:checked')
+        ).map((input) => input.value);
+
+        fetch('https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ desserts: selectedDesserts }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert('Your dessert preferences have been recorded!');
+            window.location.href = 'activities.html'; // Redirect to the next page
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
   </body>
 </html>
