@@ -29,6 +29,7 @@
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ date }),
+        mode: 'no-cors'
       })
         .then((response) => response.json())
         .then((data) => {
