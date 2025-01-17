@@ -23,13 +23,13 @@
         event.preventDefault();
         const date = document.getElementById('date').value;
 
-        fetch('https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
+        fetch('https://proxy.cors.sh/https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ date }),
-        mode: 'no-cors'
+        //mode: 'no-cors'
       })
         .then((response) => response.json())
         .then((data) => {
