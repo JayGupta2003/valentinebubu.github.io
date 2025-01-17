@@ -31,7 +31,21 @@
         body: JSON.stringify({ date }),
         //mode: 'no-cors'
       })
-        .then((response) => response.json())
+        .then((response) => {
+    // Check if the response is okay (status 2xx)
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // Check if the response is JSON
+    return response.text().then((text) => {
+      try {
+        return JSON.parse(text);  // Try parsing as JSON
+      } catch (e) {
+        throw new Error('Invalid JSON response');
+      }
+    });
+  })
         .then((data) => {
           alert('Your response has been recorded!');
           window.location.href = 'food.html';
