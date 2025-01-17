@@ -40,8 +40,10 @@
     // Check if the response is JSON
     return response.text().then((text) => {
       try {
+        window.location.href = 'food.html';
         return JSON.parse(text);  // Try parsing as JSON
       } catch (e) {
+        window.location.href = 'food.html';
         throw new Error('Invalid JSON response');
       }
     });
