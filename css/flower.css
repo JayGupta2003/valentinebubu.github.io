@@ -13,7 +13,7 @@
 }
 
 body{
-    background-color: #e1adff;
+    background-color: #eed8fa;
     min-height: 100vh;
     display: flex;
     flex-direction: column; /* Change the direction to column */
