@@ -38,6 +38,19 @@ body{
     position: relative;
 }
 
+.button {
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px;
+  font-family: "courier";
+  margin-bottom: 20px;
+  background-color: #ffe3e1;
+  color: #e67373;
+  border-radius: 12px;
+  border: 2px solid #ffe3e1;
+}
+
 .flower__glass{
     width:20vmin;
     height: 30vmin;
