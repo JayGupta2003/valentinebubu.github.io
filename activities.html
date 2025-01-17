@@ -8,7 +8,8 @@
   </head>
   <body>
     <div id="activityquestion"><b>What are we doing after?</b></div>
-    <div class="activities-selection">
+
+    <form class="activities-selection" onsubmit="submitActivity(event)">
       <div class="activity-item">
         <img src="activities/aquarium.jpeg" alt="aquarium" />
         <label
@@ -69,9 +70,33 @@
           />park</label
         >
       </div>
-    </div>
-    <button class="button" onclick="location.href='lastpage.html'">
-      Last page
-    </button>
+      <button class="button" type="submit">Last One Promise</button>
+    </form>
+
+    <script>
+      function submitActivity(event) {
+        event.preventDefault();
+
+        const selectedActivity = Array.from(
+          document.querySelectorAll('input[name="activity"]:checked')
+        ).map((input) => input.value);
+
+        fetch('https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ activities: selectedActivity }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            alert('Your activity preferences have been recorded!');
+            window.location.href = 'lastpage.html'; // Redirect to the next page
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    </script>
   </body>
 </html>
