@@ -67,14 +67,30 @@
           document.querySelectorAll('input[name="food"]:checked')
         ).map((input) => input.value);
 
-        fetch('https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
+        fetch('https://proxy.cors.sh/https://script.google.com/macros/s/AKfycbyP0awSim7A_66OJ3-Bp-W7Pss__fDsDVuUPRAeWQ6X7FOytMqVbDnj6-Djmiossdr7/exec', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ foods: selectedFoods }),
         })
-          .then((response) => response.json())
+          .then((response) => {
+    // Check if the response is okay (status 2xx)
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // Check if the response is JSON
+    return response.text().then((text) => {
+      try {
+        window.location.href = 'dessert.html';
+        return JSON.parse(text);  // Try parsing as JSON
+      } catch (e) {
+        window.location.href = 'dessert.html';
+        throw new Error('Invalid JSON response');
+      }
+    });
+  })
           .then((data) => {
             alert('Your food preferences have been recorded!');
             window.location.href = 'dessert.html'; // Redirect to the next page
