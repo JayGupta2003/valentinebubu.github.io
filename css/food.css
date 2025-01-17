@@ -25,6 +25,7 @@ body {
 }
 .food-item label {
   display: block;
+  font-size: 25px;
 }
 .button {
   padding: 10px 20px;
